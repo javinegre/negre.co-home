@@ -1,0 +1,35 @@
+{
+  "name": "negre.co-home",
+  "version": "0.0.1",
+  "description": "negre.co Home page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/javinegre/negre.co-home.git"
+  },
+  "author": "Javier Negre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javinegre/negre.co-home/issues"
+  },
+  "homepage": "https://github.com/javinegre/negre.co-home#readme",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
+    "webpack": "^2.3.2"
+  }
+}
