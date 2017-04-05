@@ -1,9 +1,11 @@
 .home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+    &-wrapper {
+        position: relative;
+        top: -12vh;
+        max-width: 514px;
+        padding: 0 2em;
+    }
 
     &-logo {
         max-width: 460px;
@@ -14,16 +16,17 @@
     }
 
     &-menu {
+        padding: 0;
+
         li {
             display: inline-block;
-        }
 
-        a {
-            text-decoration: none;
-            color: #222;
+            &::before {
+                content: '·';
+            }
 
-            &:hover {
-                color: #444;
+            &:first-child::before {
+                display: none;
             }
         }
     }

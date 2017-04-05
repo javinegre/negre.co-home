@@ -1,6 +1,9 @@
 @import 'vendor/normalize';
 
+@import 'core/fonts';
 @import 'core/variables';
-@import 'core/layout';
+@import 'core/global';
+
+@import 'layout/block';
 
 @import 'components/home';

@@ -1,0 +1,23 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: $color-bg;
+    font-family: $font-family-prim;
+}
+
+a {
+    text-decoration: none;
+    color: $color-main;
+
+    border-bottom: 1px solid $link-boder-color;
+
+    &:hover {
+        border-bottom: 1px solid $link-boder-color-hover;
+    }
+}
