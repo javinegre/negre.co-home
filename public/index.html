@@ -2,8 +2,10 @@
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
+        <meta content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width" name="viewport">
         <title>javi negre codes</title>
         <link rel="stylesheet" href="./dist/style.css"/>
+        <link rel="shortcut icon" href="./assets/img/favicon.png">
     </head>
     <body>
         <main id="main" class="main">
@@ -11,9 +13,28 @@
             <section class="home block">
                 <div class="home-wrapper">
                     <div class="home-logo">
-                        <img src="./assets/svg/javi-negre-codes.svg" alt="javi-negre-codes">
+                        <picture>
+                            <source srcset="./assets/svg/javi-negre-codes.svg" media="(min-width: 480px)">
+                            <img srcset="./assets/svg/javi-negre-codes-square.svg" alt="…">
+                        </picture>
                     </div>
-                    <div class="home-contact">
+                    <section class="home-slides home-section">
+                        <div class="home-section-label">
+                            Slides:
+                        </div>
+                        <ul class="home-menu">
+                            <li>
+                                <a href="/slides/git-history" target="_blank">Git History</a>
+                            </li>
+                            <li>
+                                <a href="/slides/git-merge-vs-rebase" target="_blank">Git - Merge vs Rebase</a>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="home-contact home-section">
+                        <div class="home-section-label">
+                            More about me:
+                        </div>
                         <ul class="home-menu home-contact-links">
                             <li>
                                 <a href="https://www.linkedin.com/in/javier-negre/" target="_blank" rel="noopener">Linkedin</a>
@@ -22,8 +43,7 @@
                                 <a href="https://github.com/javinegre" target="_blank" rel="noopener">GitHub</a>
                             </li>
                         </ul>
-
-                    </div>
+                    </section>
                 </div>
             </section>
 

@@ -1,3 +1,11 @@
+// Breakpoints
+$breakpoint-xs: 320px;
+$breakpoint-s: 480px;
+$breakpoint-m: 768px;
+$breakpoint-l: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-xxl: 1600px;
+
 // Colors
 $color-main: #333;
 $color-alt: #555;
@@ -7,7 +15,9 @@ $font-family-prim: 'Lato', sans-serif;
 $font-family-alt: 'Overpass', sans-serif;
 
 $color-text: $color-main;
+$color-text-grey: #606060;
+$color-text-light: #909090;
 
-$link-boder-color: #c0c0c0;
-$link-boder-color-hover: $color-alt;
+$link-boder-color: #d0d0d0;
+$link-boder-color-hover: #606060;
 
