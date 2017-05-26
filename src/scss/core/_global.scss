@@ -14,11 +14,12 @@ body {
 
 a {
     text-decoration: none;
-    color: $color-main;
+    color: $color-text-alt;
 
     border-bottom: 1px solid $link-boder-color;
 
     &:hover {
-        border-bottom: 1px solid $link-boder-color-hover;
+        color: $color-text;
+        border-bottom: 2px solid $link-boder-color-hover;
     }
 }

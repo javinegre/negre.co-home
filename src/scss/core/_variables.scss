@@ -7,17 +7,19 @@ $breakpoint-xl: 1280px;
 $breakpoint-xxl: 1600px;
 
 // Colors
-$color-main: #333;
-$color-alt: #555;
 $color-bg: #f8f8f8;
+
+$color-main: #29abe2;
+$color-alt: #00a99d;
 
 $font-family-prim: 'Lato', sans-serif;
 $font-family-alt: 'Overpass', sans-serif;
 
-$color-text: $color-main;
+$color-text: #333;
+$color-text-alt: #555;
 $color-text-grey: #606060;
 $color-text-light: #909090;
 
 $link-boder-color: #d0d0d0;
-$link-boder-color-hover: #606060;
+$link-boder-color-hover: $color-main;
 
