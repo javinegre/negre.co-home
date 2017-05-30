@@ -5,33 +5,20 @@ class CVChart {
 
   constructor(selector) {
     this.selector = selector;
+
+    this.$container = document.querySelector(selector);
+    this.$svg = d3.select(`${selector} svg`);
+
+    this.buildDefs();
+
+    this.now = +new Date();
+
+    window.addEventListener('resize', this.reDraw.bind(this));
+    window.addEventListener('orientationchange', this.reDraw.bind(this));
   }
 
-  render() {
-    const svg = d3.select(this.selector);
-
-    const margin = { top: 2, right: 4, bottom: 2, left: 44 };
-    const width = +svg.attr('width') - margin.left - margin.right;
-    const height = +svg.attr('height') - margin.top - margin.bottom;
-
-    const now = +new Date();
-
-    const yValues = data.cvChartData.languages.map(d => d.name)
-      .filter((d, i, self) => i === self.indexOf(d));
-
-    const x = d3.scaleLinear()
-      .rangeRound([0, width])
-      .domain([+new Date('2008-07'), now]);
-
-    const y = d3.scaleBand()
-      .rangeRound([0, height - 48])
-      .domain(yValues)
-      .padding(0.2);
-
-    const g = svg.append('g')
-      .attr('transform', `translate(${margin.left},${margin.top})`);
-
-    const svgDefs = svg.append('svg:defs');
+  buildDefs() {
+    const svgDefs = this.$svg.append('svg:defs');
 
     svgDefs.append('svg:pattern')
       .attr('id', 'pattern-stripe')
@@ -53,8 +40,45 @@ class CVChart {
       .attr('width', '100%')
       .attr('height', '100%')
       .attr('fill', 'url(#pattern-stripe)');
+  }
 
-    const getTs = date => (date === Infinity ? now : +new Date(`20${date}`));
+  getTs(date) {
+    return date === Infinity ? this.now : +new Date(`20${date}`);
+  }
+
+  reDraw() {
+    this.$svg.selectAll('g').remove();
+    this.draw();
+  }
+
+  draw() {
+    if (this.chartIsHidden()) {
+      return;
+    }
+
+    const oWidth = this.$container.clientWidth;
+
+    this.$svg.attr('width', oWidth + 44)
+      .attr('height', oWidth * 0.45);
+
+    const margin = { top: 2, right: 0, bottom: 2, left: 44 };
+    const width = +this.$svg.attr('width') - margin.left - margin.right;
+    const height = +this.$svg.attr('height') - margin.top - margin.bottom;
+
+    const yValues = data.cvChartData.languages.map(d => d.name)
+      .filter((d, i, self) => i === self.indexOf(d));
+
+    const x = d3.scaleLinear()
+      .rangeRound([0, width])
+      .domain([+new Date('2008-07'), this.now]);
+
+    const y = d3.scaleBand()
+      .rangeRound([0, height - 48])
+      .domain(yValues)
+      .padding(0.2);
+
+    const g = this.$svg.append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`);
 
     g.append('svg:g')
       .attr('id', 'bars')
@@ -63,9 +87,9 @@ class CVChart {
       .data(data.cvChartData.languages)
       .enter()
       .append('rect')
-      .attr('x', d => x(getTs(d.span[0])))
+      .attr('x', d => x(this.getTs(d.span[0])))
       .attr('y', d => y(d.name))
-      .attr('width', d => x(getTs(d.span[1])) - x(getTs(d.span[0])))
+      .attr('width', d => x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])))
       .attr('height', d => (d.type === 'personal' ? y.bandwidth() / 3 : y.bandwidth()))
       .attr('transform', d => (d.type === 'personal' ? `translate(0,${(y.bandwidth() / 3)})` : ''))
       .attr('mask', d => (d.type === 'secondary' ? 'url(#mask-stripe)' : ''))
@@ -78,7 +102,7 @@ class CVChart {
       .data(data.yAxisValues)
       .enter()
       .append('text')
-      .attr('x', d => (x(getTs(d.pos)) - 4))
+      .attr('x', d => (x(this.getTs(d.pos)) - 4))
       .attr('y', d => y(d.name))
       .attr('dy', ((y.bandwidth() / 2) + 1))
       .attr('text-anchor', 'end')
@@ -95,9 +119,9 @@ class CVChart {
       .data(data.xAxisValues)
       .enter()
       .append('rect')
-      .attr('x', d => x(getTs(d.span[0])))
+      .attr('x', d => x(this.getTs(d.span[0])))
       .attr('y', 0)
-      .attr('width', d => (x(getTs(d.span[1])) - x(getTs(d.span[0])) - 1))
+      .attr('width', d => (x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])) - 1))
       .attr('height', 18)
       .style('fill', (d, i) => (i % 2 === 0 ? '#303030' : '#4a4a4a'));
 
@@ -105,7 +129,7 @@ class CVChart {
       .data(data.xAxisValues)
       .enter()
       .append('text')
-      .attr('x', d => ((x(getTs(d.span[1])) + x(getTs(d.span[0]))) / 2))
+      .attr('x', d => ((x(this.getTs(d.span[1])) + x(this.getTs(d.span[0]))) / 2))
       .attr('y', 0)
       .attr('dy', 2)
       .attr('text-anchor', 'middle')
@@ -120,7 +144,7 @@ class CVChart {
       .data(data.yearTicks)
       .enter()
       .append('text')
-      .attr('x', d => x(getTs(d)))
+      .attr('x', d => x(this.getTs(d)))
       .attr('y', 0)
       .attr('dy', 2)
       .attr('text-anchor', 'middle')
@@ -187,6 +211,10 @@ class CVChart {
       .attr('alignment-baseline', 'middle')
       .style('font-size', '11px')
       .text('Personal projects');
+  }
+
+  chartIsHidden() {
+    return window.getComputedStyle(this.$container).getPropertyValue('display') === 'none';
   }
 }
 
