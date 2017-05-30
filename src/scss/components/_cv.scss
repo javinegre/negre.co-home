@@ -3,13 +3,19 @@
     h3,
     h4 {
         font-family: "Overpass", sans-serif;
-        margin: 0 0 .2em 0;
+        margin: 0;
     }
 
     h2 {
+        font-weight: 900;
         background: -webkit-linear-gradient(left top, $color-main, $color-alt);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+
+    h3 {
+        font-weight: 900;
+        color: #333;
     }
 
     &-section {
@@ -30,35 +36,83 @@
             left: 0;
         }
 
-        &:last-child::after {
-            display: none;
+        &:last-child {
+            margin-bottom: 2.2em;
+
+            &::after {
+                display: none;
+            }
         }
     }
 
     &-period {
-        margin-bottom: 2em;
+        margin-bottom: 3em;
     }
 
     &-page {
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+
+    &-wrapper {
         max-width: 800px;
-        margin: 2em 1.4em;
+        margin-left: 1.4em;
+        margin-right: 1.4em;
     }
 
     &-line{
         position: relative;
-        margin-bottom: 1em;
+        margin-bottom: 0.4em;
+        line-height: 24px;
 
         &-label {
+            position: relative;
+            top: 3px;
             font-family: "Lato", sans-serif;
-            font-style: italic;
-            color: $color-text-light;
+            color: $color-text-grey;
+            font-weight: 300;
             font-size: 0.85em;
+
+            &-date {
+                top: -2px;
+                font-weight: 400;
+            }
+        }
+    }
+
+    &-personal {
+        &-group {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .cv-line {
+            flex-basis: 50%;
+            width: 50%;
         }
     }
 
     &-chart {
-        position: relative;
-        left: -44px;
+        display: none;
+
+        &-mobile-message {
+            display: flex;
+            padding: 12px;
+            line-height: 24px;
+            border: 2px dashed $link-boder-color;
+            background-color: rgba(255, 255, 255, 0.66);
+            border-radius: 4px;
+            color: $color-text-light;
+            font-weight: 300;
+
+            img {
+                height: 24px;
+                margin-right: 8px;
+                vertical-align: middle;
+                opacity: 0.6;
+            }
+        }
     }
 
     &-link-new-tab {
@@ -84,12 +138,45 @@
             transform: scale(1.1);
         }
     }
+
+    &-back-button {
+        background-color: $color-main;
+        box-shadow: inset 0px 10px 20px -10px rgba(0, 0, 0, 0.33);
+
+        .caret {
+            position: relative;
+        }
+
+        a {
+            color: #FFFFFF;
+            font-size: 1.2em;
+            line-height: 64px;
+            font-weight: 300;
+
+            &:hover {
+                .caret {
+                    left: -4px;
+                }
+            }
+        }
+    }
 }
 
 @media all and (min-width: $breakpoint-s) {
     .cv {
-        &-page {
-            margin: 2em 3.2em;
+        &-wrapper {
+            margin-left: 3.2em;
+            margin-right: 3.2em;
+        }
+
+        &-chart {
+            display: block;
+            position: relative;
+            left: -44px;
+
+            &-mobile-message {
+                display: none;
+            }
         }
     }
 }
@@ -97,8 +184,14 @@
 @media all and (min-width: $breakpoint-m) {
     .cv {
         &-page {
+            margin-top: 4em;
+            margin-bottom: 4em;
+        }
+
+        &-wrapper {
             max-width: 800px;
-            margin: 4em auto;
+            margin-left: auto;
+            margin-right: auto;
             padding-left: 120px;
             padding-right: 3.2em;
         }
@@ -117,10 +210,15 @@
 
             &-label {
                 position: absolute;
+                top: 0;
                 left: -132px;
                 width: 120px;
                 text-align: right;
             }
+        }
+
+        &-personal-group {
+            display: block;
         }
     }
 }
@@ -152,8 +250,14 @@
         }
 
         &-page {
+            margin-top: 4em;
+            margin-bottom: 4em;
+        }
+
+        &-wrapper {
             max-width: 800px;
-            margin: 4em auto;
+            margin-left: auto;
+            margin-right: auto;
             padding-left: 120px;
             padding-right: 3.2em;
         }
