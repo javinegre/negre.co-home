@@ -65,12 +65,6 @@ const data = {
         type: 'personal',
       },
       {
-        name: 'Node.js',
-        span: ['14-11', Infinity],
-        fill: '#f9d88b',
-        type: 'personal',
-      },
-      {
         name: 'Angular 1',
         span: ['12-08', '15-12'],
         fill: '#f9d88b',
@@ -79,6 +73,12 @@ const data = {
       {
         name: 'React',
         span: ['14-03', Infinity],
+        fill: '#f9d88b',
+        type: 'personal',
+      },
+      {
+        name: 'Node.js',
+        span: ['14-11', Infinity],
         fill: '#f9d88b',
         type: 'personal',
       },
