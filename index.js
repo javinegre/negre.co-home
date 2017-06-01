@@ -13,7 +13,7 @@ app.get('/cv', function(req, res) {
 });
 
 app.get('*', (req, res) => {
-  res.send(`404 - ${req.url} route not found`);
+  res.sendFile(path.join(__dirname + '/public/404.html'));
 });
 
 module.exports = app;
