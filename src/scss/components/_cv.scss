@@ -143,19 +143,31 @@
         background-color: $color-main;
         box-shadow: inset 0px 10px 20px -10px rgba(0, 0, 0, 0.33);
 
-        .caret {
-            position: relative;
-        }
-
         a {
             color: #FFFFFF;
             font-size: 1.2em;
             line-height: 64px;
             font-weight: 300;
 
+            .cv-back-button-text {
+                position: relative;
+
+                &::before {
+                    content: ' ';
+                    position: absolute;
+                    top: 4px;
+                    left: -14px;
+                    width: 10px;
+                    height: 18px;
+                    background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 10"><path fill="none" stroke="#FFF" stroke-miterlimit="10" d="M5 9L1 5 5 1"/></svg>');
+                    transition: transform 150ms ease-in-out;
+                    will-change: transform;
+                }
+            }
+
             &:hover {
-                .caret {
-                    left: -4px;
+                .cv-back-button-text::before {
+                    transform: translateX(-3px);
                 }
             }
         }
