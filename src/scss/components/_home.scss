@@ -2,7 +2,7 @@
 
     &-wrapper {
         position: relative;
-        top: -12vh;
+        top: -8vh;
         max-width: 514px;
         padding: 0 2em;
     }
@@ -21,25 +21,24 @@
         margin-bottom: 2em;
 
         &-label {
-            font-family: $font-family-alt;
-            color: $color-text-light;
+            color: $color-text-lighter;
             margin-bottom: .2em;
+            font-weight: 300;
         }
     }
 
     &-menu {
         padding: 0;
         margin: 0;
+        list-style: none;
 
         li {
-            display: inline-block;
+            position: relative;
 
             &::before {
                 content: '·';
-            }
-
-            &:first-child::before {
-                display: none;
+                position: absolute;
+                left: -12px;
             }
         }
     }
@@ -51,5 +50,22 @@
             max-width: initial;
         }
     }
-}
 
+    .home {
+        &-menu {
+            li {
+                display: inline-block;
+
+                &::before {
+                    position: relative;
+                    margin: 0 4px;
+                    left: initial;
+                }
+
+                &:first-child::before {
+                    display: none;
+                }
+            }
+        }
+    }
+}
