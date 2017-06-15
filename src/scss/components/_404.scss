@@ -38,6 +38,37 @@
         transform: translateY(-10vh);
         z-index: 100;
     }
+
+    &-back-button {
+        position: fixed;
+        z-index: 300;
+        width: 100%;
+        bottom: 2vh;
+        font-weight: 300;
+        text-align: center;
+
+        a {
+            position: relative;
+            color: $color-main;
+            border-bottom: none;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 5px;
+                left: -12px;
+                height: 12px;
+                width: 7px;
+                background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 10"><path fill="none" stroke="#29ABE2" stroke-miterlimit="10" d="M5 9L1 5 5 1"/></svg>');
+                transition: transform 150ms ease-in-out;
+                will-change: transform;
+            }
+
+            &:hover::before {
+                transform: translateX(-3px);
+            }
+        }
+    }
 }
 
 @media all and (min-width: $breakpoint-m) {
