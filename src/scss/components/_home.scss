@@ -1,8 +1,11 @@
 .home {
 
+    &.block {
+        min-height: 100vh;
+    }
+
     &-wrapper {
         position: relative;
-        top: -8vh;
         max-width: 514px;
         padding: 0 2em;
     }
@@ -21,7 +24,7 @@
         margin-bottom: 2em;
 
         &-label {
-            color: $color-text-lighter;
+            color: $color-text-light;
             margin-bottom: .2em;
             font-weight: 300;
         }
@@ -39,6 +42,10 @@
                 content: '·';
                 position: absolute;
                 left: -12px;
+            }
+
+            a {
+                line-height: 28px;
             }
         }
     }
