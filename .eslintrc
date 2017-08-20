@@ -4,5 +4,11 @@
   "env": {
     "browser": true,
     "node": false
+  },
+  "rules": {
+    "no-new": 0
+  },
+  "globals": {
+    "Waypoint": true
   }
 }
