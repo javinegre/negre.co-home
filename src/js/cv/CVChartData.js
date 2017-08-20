@@ -48,9 +48,15 @@ const data = {
       },
       {
         name: 'JS (jQuery)',
-        span: ['12-08', Infinity],
+        span: ['12-08', '17-06'],
         fill: '#f9d88b',
         type: 'primary',
+      },
+      {
+        name: 'JS (jQuery)',
+        span: ['17-06', Infinity],
+        fill: '#f9d88b',
+        type: 'personal',
       },
       {
         name: 'D3',
@@ -69,6 +75,12 @@ const data = {
         span: ['12-08', '15-12'],
         fill: '#f9d88b',
         type: 'personal',
+      },
+      {
+        name: 'Angular 1',
+        span: ['17-07', Infinity],
+        fill: '#f9d88b',
+        type: 'primary',
       },
       {
         name: 'React',
@@ -90,13 +102,13 @@ const data = {
       },
       {
         name: 'PHP',
-        span: ['12-08', Infinity],
+        span: ['12-08', '17-06'],
         fill: '#bcadd1',
         type: 'secondary',
       },
       {
         name: 'WordPress',
-        span: ['15-06', Infinity],
+        span: ['15-06', '17-06'],
         fill: '#bcadd1',
         type: 'secondary',
       },
@@ -187,7 +199,11 @@ const data = {
     },
     {
       name: 'TwitterCounter / TNW',
-      span: ['12-08', Infinity],
+      span: ['12-08', '17-06'],
+    },
+    {
+      name: ' ',
+      span: ['17-06', Infinity],
     },
   ],
 

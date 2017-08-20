@@ -3,8 +3,8 @@ import 'waypoints/lib/noframework.waypoints';
 import CVChart from './cv/CVChart';
 
 const CV = () => {
-  const host = 'negre.co';
-  const name = 'javi';
+  const host = 'gmail.com';
+  const name = 'javi.negre';
   const emailLink = `mailto:${name}@${host}`;
   const mailtos = document.getElementsByClassName('js-mailto');
   const len = mailtos.length;
