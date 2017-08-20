@@ -51,7 +51,7 @@
 
     &-page {
         margin-top: 2em;
-        margin-bottom: 2em;
+        margin-bottom: 6em;
     }
 
     &-wrapper {
@@ -140,13 +140,18 @@
     }
 
     &-back-button {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 32px;
         background-color: $color-main;
-        box-shadow: inset 0px 10px 20px -10px rgba(0, 0, 0, 0.33);
+        transition: all 400ms ease;
 
         a {
             color: #FFFFFF;
-            font-size: 1.2em;
-            line-height: 64px;
+            font-size: 1em;
+            line-height: 32px;
             font-weight: 300;
 
             .cv-back-button-text {
@@ -155,10 +160,10 @@
                 &::before {
                     content: ' ';
                     position: absolute;
-                    top: 4px;
+                    top: 3px;
                     left: -14px;
-                    width: 10px;
-                    height: 18px;
+                    width: 8px;
+                    height: 13px;
                     background: url('data:image/svg+xml;utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 10"><path fill="none" stroke="#FFF" stroke-miterlimit="10" d="M5 9L1 5 5 1"/></svg>');
                     transition: transform 150ms ease-in-out;
                     will-change: transform;
@@ -168,6 +173,27 @@
             &:hover {
                 .cv-back-button-text::before {
                     transform: translateX(-3px);
+                }
+            }
+        }
+
+        &--bottom-reached {
+            height: 64px;
+            transition: all 200ms ease;
+
+            a {
+                font-size: 1.2em;
+                line-height: 64px;
+
+                .cv-back-button-text {
+                    width: 10px;
+                    height: 18px;
+
+                    &::before {
+                        left: -17px;
+                        width: 10px;
+                        height: 16px;
+                    }
                 }
             }
         }
@@ -190,6 +216,16 @@
                 display: none;
             }
         }
+
+        &-back-button {
+            a {
+                .cv-back-button-text {
+                    &::before {
+                        left: -20px;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -197,7 +233,7 @@
     .cv {
         &-page {
             margin-top: 4em;
-            margin-bottom: 4em;
+            margin-bottom: 7em;
         }
 
         &-wrapper {
@@ -263,7 +299,7 @@
 
         &-page {
             margin-top: 4em;
-            margin-bottom: 4em;
+            margin-bottom: 8em;
         }
 
         &-wrapper {
