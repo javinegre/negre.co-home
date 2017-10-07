@@ -4,8 +4,8 @@ const express = require('express'),
 
 app.use(express.static(__dirname + '/public'));
 
-app.get(/^\/(des\/)?$/, (req, res) => {
-  res.send(`This is the ${req.url} route in home`);
+app.get(/^\/des(\/)?$/, (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
 app.get('/cv', function(req, res) {
