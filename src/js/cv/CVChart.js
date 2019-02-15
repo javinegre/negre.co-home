@@ -171,6 +171,7 @@ class CVChart {
       .attr('y', 0)
       .attr('dy', ((y.bandwidth() / 2) + 1))
       .attr('alignment-baseline', 'middle')
+      .attr('stroke', '#b0b0b0')
       .style('font-size', '11px')
       .text('Primary at work');
 
@@ -190,6 +191,7 @@ class CVChart {
       .attr('y', 0)
       .attr('dy', ((y.bandwidth() / 2) + 1))
       .attr('alignment-baseline', 'middle')
+      .attr('stroke', '#b0b0b0')
       .style('font-size', '11px')
       .text('Secondary at work');
 
@@ -209,6 +211,7 @@ class CVChart {
       .attr('y', 0)
       .attr('dy', ((y.bandwidth() / 2) + 1))
       .attr('alignment-baseline', 'middle')
+      .attr('stroke', '#b0b0b0')
       .style('font-size', '11px')
       .text('Personal projects');
   }

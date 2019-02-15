@@ -12,6 +12,20 @@ const CV = () => {
     mailtos[i].setAttribute('href', emailLink);
   }
 
+  const $birth = document.querySelector('[data-birthdate]');
+  const birth = new Date($birth.dataset.birthdate);
+  const now = new Date();
+  let age = now.getFullYear() - birth.getFullYear();
+
+  const strNow = `${now.getMonth()}-${now.getDate()}`;
+  const strBirth = `${birth.getMonth()}-${birth.getDate()}`;
+
+  if (strNow < strBirth) {
+    age -= 1;
+  }
+
+  $birth.innerHTML = age;
+
   const cvChart = new CVChart('#cv-chart');
   cvChart.draw();
 
