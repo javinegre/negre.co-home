@@ -33,7 +33,7 @@
 
         &-label {
             color: $color-text-light;
-            margin-bottom: .2em;
+            margin: 0;
             font-weight: 300;
         }
     }
@@ -51,8 +51,9 @@
             &::after {
                 content: '·';
                 position: absolute;
-                top: 0;
-                right: -12px;
+                top: 4px;
+                right: -14px;
+                opacity: 0.3;
             }
 
             &:last-child {

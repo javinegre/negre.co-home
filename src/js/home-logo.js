@@ -1,10 +1,6 @@
-
-import * as Helpers from './common/helpers';
+import Helpers from './common/helpers';
 
 const HomeLogo = (config) => {
-  // TODO: find better way to use helpers
-  const helpers = Helpers.default;
-
   const reds = ['red', 'salmon', 'crimson', 'orangered', 'gold', 'darkred'];
   const greens = ['green', 'olivedrab', 'yellowgreen', 'seagreen', 'springgreen', 'lime'];
   const blues = ['blue', 'darkturquoise', 'teal', 'navy', 'aquamarine', 'lightskyblue'];
@@ -29,20 +25,27 @@ const HomeLogo = (config) => {
     $canvas = config.$canvas;
     $gradBgCanvas = config.$gradBgCanvas;
 
+    $canvas.style.opacity = 0;
+    $canvas.style.transition = 'opacity 1s cubic-bezier(0, 0.75, 0.5, 1) 0s';
+
     w = config.w;
     h = config.h;
 
-    reCalc();
-    generateGradientBackground();
+    run();
   }
 
   function setDimensions(newConfig) {
     w = newConfig.w;
     h = newConfig.h;
 
+    translateBackground(0, 0);
+
+    run();
+  }
+
+  function run() {
     reCalc();
-    // TODO: uncomment line below after debouncing line below
-    // generateGradientBackground();
+    generateGradientBackground();
   }
 
   function reCalc() {
@@ -70,17 +73,21 @@ const HomeLogo = (config) => {
 
   function moveBackground(ev) {
     const [tX, tY] = getBackgroundTranslation(ev.x, ev.y);
-    $gradBgCanvas.style.transform = `translate(${tX}px,${tY}px)`;
+    translateBackground(tX, tY);
+  }
+
+  function translateBackground(x, y) {
+    $gradBgCanvas.style.transform = `translate(${x}px,${y}px)`;
   }
 
   function generateGradientBackground() {
-    const colorScheme = helpers.shuffleArray([
-      helpers.randomElementFromArray(reds),
-      helpers.randomElementFromArray(greens),
-      helpers.randomElementFromArray(blues),
+    const colorScheme = Helpers.shuffleArray([
+      Helpers.randomElementFromArray(reds),
+      Helpers.randomElementFromArray(greens),
+      Helpers.randomElementFromArray(blues),
     ]);
 
-    const rot = helpers.randomInt(0, 120);
+    const rot = Helpers.randomInt(0, 120);
 
     $gradBgCanvas.style.background = [
       getLinearGradientStr(rot, colorScheme[0]),
@@ -88,8 +95,7 @@ const HomeLogo = (config) => {
       getLinearGradientStr(rot + 240, colorScheme[2]),
     ].join(',');
 
-    // TODO: move to css
-    $gradBgCanvas.style.backgroundBlendMode = 'screen';
+    $canvas.style.opacity = 1;
   }
 
   function getLinearGradientStr(direction, color) {

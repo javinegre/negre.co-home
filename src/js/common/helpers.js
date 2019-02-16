@@ -21,6 +21,15 @@ const Helpers = {
     return Math.floor(Math.random() * ((maax - miin) + 1)) + miin;
   },
 
+  debounce: (func, delay) => {
+    let inDebounce;
+    return function innerFunc(...args) {
+      const context = this;
+      clearTimeout(inDebounce);
+      inDebounce = setTimeout(() => func.apply(context, args), delay);
+    };
+  },
+
 };
 
 export default Helpers;

@@ -1,4 +1,5 @@
 import Logo from './home-logo';
+import Helpers from './common/helpers';
 
 const Home = () => {
   const $canvas = document.querySelector('.home-logo-wrapper');
@@ -29,8 +30,7 @@ const Home = () => {
 
   function initEvents() {
     // Events
-    // TODO: debounce this!
-    window.addEventListener('resize', resizeCalcs);
+    window.addEventListener('resize', Helpers.debounce(resizeCalcs, 200));
     document.body.addEventListener('mousemove', logo.moveBackground);
     document.body.addEventListener('click', logo.generateGradientBackground);
   }
