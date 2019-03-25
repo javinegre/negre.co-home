@@ -43,7 +43,14 @@ const Home = () => {
   }
 
   function checkClipPathSupport() {
-    return 'CSS' in window && window.CSS.supports('clip-path', 'url()');
+    const oldBrowser = !('CSS' in window); // IE Explorer
+    const isMSEdge = 'CSS' in window && window.CSS.supports('-ms-ime-align', 'auto');
+    const isSupported = 'CSS' in window && window.CSS.supports('clip-path', 'url()');
+    // Disable for mobile devices as most of them don't
+    // support clip-path (window.CSS.supports(...) fails)
+    const touchCapable = 'ontouchstart' in document.documentElement;
+
+    return isSupported && !oldBrowser && !isMSEdge && !touchCapable;
   }
 };
 
