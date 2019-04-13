@@ -104,6 +104,10 @@
         .cv-line {
             flex-basis: 50%;
             width: 50%;
+
+            &:last-child {
+                flex-basis: 100%;
+            }
         }
     }
 
@@ -316,7 +320,8 @@
             }
         }
 
-        h2 {
+        h2,
+        .cv-period h3 {
             color: black;
             -webkit-background-clip: border-box;
             -webkit-text-fill-color: initial;
@@ -348,7 +353,7 @@
         }
 
         &-line {
-            line-height: 28px;
+            line-height: 24px;
             margin-bottom: 0;
 
             &-label {
