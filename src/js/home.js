@@ -44,13 +44,21 @@ const Home = () => {
 
   function checkClipPathSupport() {
     const oldBrowser = !('CSS' in window); // IE Explorer
+    // http://browserhacks.com/#hack-dee2c3ab477a0324b6a2283c434108c8
+    const isChromium = !!window.chrome;
     const isMSEdge = 'CSS' in window && window.CSS.supports('-ms-ime-align', 'auto');
+    // http://browserhacks.com/#hack-462504c4ab517b400419d1b3d73d943a
+    const isSafari = !!navigator.userAgent.match(/safari/i)
+      && !navigator.userAgent.match(/chrome/i)
+      && typeof document.body.style.webkitFilter !== 'undefined'
+      && !isChromium;
     const isSupported = 'CSS' in window && window.CSS.supports('clip-path', 'url()');
     // Disable for mobile devices as most of them don't
     // support clip-path (window.CSS.supports(...) fails)
     const touchCapable = 'ontouchstart' in document.documentElement;
 
-    return isSupported && !oldBrowser && !isMSEdge && !touchCapable;
+    // FML this was supposed to be easy
+    return isSupported && !oldBrowser && !isSafari && !isMSEdge && !touchCapable;
   }
 };
 
