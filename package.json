@@ -36,6 +36,8 @@
   },
   "dependencies": {
     "d3": "^4.13.0",
+    "fstream": "^1.0.0",
+    "tar": "^2.0.0",
     "waypoints": "^4.0.1"
   }
 }
