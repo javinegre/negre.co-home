@@ -95,6 +95,15 @@
             color: #FFFFFF;
         }
 
+        h4 {
+            position: relative;
+            top: -1em;
+
+            a {
+                color: #f0f0f0;
+            }
+        }
+
         &-group {
             display: flex;
             flex-direction: row;
