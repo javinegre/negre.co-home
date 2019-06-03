@@ -26,8 +26,7 @@ const config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: { presets: ['env'] }
+        loader: 'babel-loader?presets[]=env'
       },
       {
         test: /\.scss$/,
