@@ -135,15 +135,16 @@
         &--noGradient {
             .home-logo-svg {
                 justify-content: flex-end;
+                margin-right: 0;
 
                 &--flat {
                     display: none;
                 }
                 &--square {
                     display: block;
-                    max-width: 222px;
-                    height: 156px;
-                    margin-right: 12px;
+                    max-width: 200px;
+                    height: 142px;
+                    margin-right: 16px;
                 }
             }
         }
