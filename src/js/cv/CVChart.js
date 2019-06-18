@@ -1,4 +1,8 @@
-import * as d3 from 'd3';
+import {
+  select as d3select,
+  scaleLinear as d3scaleLinear,
+  scaleBand as d3scaleBand,
+} from 'd3';
 import data from './CVChartData';
 
 class CVChart {
@@ -7,7 +11,7 @@ class CVChart {
     this.selector = selector;
 
     this.$container = document.querySelector(selector);
-    this.$svg = d3.select(`${selector} svg`);
+    this.$svg = d3select(`${selector} svg`);
 
     this.buildDefs();
 
@@ -68,11 +72,11 @@ class CVChart {
     const yValues = data.cvChartData.languages.map(d => d.name)
       .filter((d, i, self) => i === self.indexOf(d));
 
-    const x = d3.scaleLinear()
+    const x = d3scaleLinear()
       .rangeRound([0, width])
       .domain([+new Date('2008-07'), this.now]);
 
-    const y = d3.scaleBand()
+    const y = d3scaleBand()
       .rangeRound([0, height - 48])
       .domain(yValues)
       .padding(0.2);

@@ -1,4 +1,7 @@
-import * as d3 from 'd3';
+import {
+  select as d3select,
+  mouse as d3mouse,
+} from 'd3';
 
 const fit = ($overlay, $mask) => {
   const wWidth = window.innerWidth;
@@ -15,7 +18,7 @@ const fit = ($overlay, $mask) => {
 };
 
 const Page404 = () => {
-  const $overlay = d3.select('svg');
+  const $overlay = d3select('svg');
   const $mask = $overlay.select('mask rect');
   const $canvas = $overlay.select('rect.canvas');
 
@@ -33,7 +36,7 @@ const Page404 = () => {
   document.addEventListener('mousemove', foonction);
 
   $overlay.on('mousemove', (a, b, node) => {
-    const coords = d3.mouse(node[0]);
+    const coords = d3mouse(node[0]);
     $mask.attr('transform', `translate(${coords[0]},${coords[1]})`);
   });
 
