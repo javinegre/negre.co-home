@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const BUILD_DIR = path.resolve(__dirname, 'public/dist');
 const APP_DIR = path.resolve(__dirname, 'src');
@@ -17,28 +17,42 @@ const config = {
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          failOnError: false,
-          failOnWarning: false,
+        use: {
+          loader: 'eslint-loader',
+          options: {
+            failOnError: false,
+            failOnWarning: false,
+          }
         }
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader?presets[]=env'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: BUILD_DIR,
+              // hmr: process.env.NODE_ENV === 'development',
+            },
+          },
+          'css-loader',
+          'sass-loader'
+        ],
       }
     ],
   },
   plugins: [
-    new ExtractTextPlugin('style.css')
+    new MiniCssExtractPlugin('style.css')
   ]
 };
 
