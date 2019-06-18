@@ -6,7 +6,6 @@ import {
 import data from './CVChartData';
 
 class CVChart {
-
   constructor(selector) {
     this.selector = selector;
 
@@ -65,7 +64,9 @@ class CVChart {
     this.$svg.attr('width', oWidth + 44)
       .attr('height', oWidth * 0.45);
 
-    const margin = { top: 2, right: 0, bottom: 2, left: 44 };
+    const margin = {
+      top: 2, right: 0, bottom: 2, left: 44,
+    };
     const width = +this.$svg.attr('width') - margin.left - margin.right;
     const height = +this.$svg.attr('height') - margin.top - margin.bottom;
 

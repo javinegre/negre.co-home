@@ -22,21 +22,20 @@ const HomeLogo = (config) => {
   };
 
   function init() {
-    $canvas = config.$canvas;
-    $gradBgCanvas = config.$gradBgCanvas;
+    ({
+      $canvas, $gradBgCanvas, w, h,
+    } = config);
 
     $canvas.style.opacity = 0;
     $canvas.style.transition = 'opacity 1s cubic-bezier(0, 0.75, 0.5, 1) 0s';
-
-    w = config.w;
-    h = config.h;
 
     run();
   }
 
   function setDimensions(newConfig) {
-    w = newConfig.w;
-    h = newConfig.h;
+    ({
+      w, h,
+    } = newConfig);
 
     translateBackground(0, 0);
 
