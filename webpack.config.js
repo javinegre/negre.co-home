@@ -1,15 +1,25 @@
-const webpack = require('webpack');
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const BUILD_DIR = path.resolve(__dirname, 'public/dist');
-const APP_DIR = path.resolve(__dirname, 'src');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+
+const SRC_DIR = path.resolve(__dirname, 'src');
+const PUBLIC_DIR = path.resolve(__dirname, 'public');
+const DIST_PATH = 'dist';
+const DIST_DIR = `${PUBLIC_DIR}/${DIST_PATH}`;
+
+const htmlFiles = [
+  'index',
+  'cv',
+  '404'
+];
 
 const config = {
-  entry: APP_DIR + '/js/app.js',
+  entry: `${SRC_DIR}/js/app.js`,
   output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js'
+    path: DIST_DIR,
+    filename: 'bundle.[contenthash].js',
+    publicPath: `${DIST_PATH}/`
   },
   module : {
     rules: [
@@ -40,10 +50,7 @@ const config = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: BUILD_DIR,
-              // hmr: process.env.NODE_ENV === 'development',
-            },
+            //options: {},
           },
           'css-loader',
           'sass-loader'
@@ -52,7 +59,16 @@ const config = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin('style.css')
+    ...htmlFiles.map(fileBaseName => {
+      return new HtmlWebPackPlugin({
+        template: `${SRC_DIR}/html/${fileBaseName}.html`,
+        filename: `./${fileBaseName}.html`
+      });
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].css',
+    })
   ]
 };
 

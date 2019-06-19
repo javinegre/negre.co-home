@@ -8,13 +8,6 @@ echo "✅ "
 
 echo
 
-echo "Assets versioning ..."
-# Replace ?REV with last commit (short) hash in html files
-sed -i 's/\?REV/\?'"$(git rev-parse --short HEAD)"'/g' public/*.html
-echo "✅ "
-
-echo
-
 # Compile assets
 echo "Compiling assets ..."
 node_modules/webpack/bin/webpack.js -p
