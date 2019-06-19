@@ -1,6 +1,8 @@
 import Logo from './home-logo';
 import Helpers from './common/helpers';
 
+import '../scss/style.scss';
+
 const Home = () => {
   const $canvas = document.querySelector('.home-logo-wrapper');
   const $gradBgCanvas = document.querySelector('.gradBg-canvas');
@@ -56,4 +58,4 @@ const Home = () => {
   }
 };
 
-export default Home;
+Home();

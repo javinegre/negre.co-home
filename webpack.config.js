@@ -9,17 +9,29 @@ const PUBLIC_DIR = path.resolve(__dirname, 'public');
 const DIST_PATH = 'dist';
 const DIST_DIR = `${PUBLIC_DIR}/${DIST_PATH}`;
 
-const htmlFiles = [
-  'index',
-  'cv',
-  '404'
+const pages = [
+  {
+    baseName: 'index',
+    chunks: ['home']
+  },
+  {
+    baseName: 'cv',
+    chunks: ['app']
+  },
+  {
+    baseName: '404',
+    chunks: ['app']
+  }
 ];
 
 const config = {
-  entry: `${SRC_DIR}/js/app.js`,
+  entry: {
+    'app': `${SRC_DIR}/js/app.js`,
+    'home': `${SRC_DIR}/js/home.js`
+  },
   output: {
     path: DIST_DIR,
-    filename: 'bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
     publicPath: `${DIST_PATH}/`
   },
   module : {
@@ -61,10 +73,11 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    ...htmlFiles.map(fileBaseName => {
+    ...pages.map(page => {
       return new HtmlWebPackPlugin({
-        template: `${SRC_DIR}/html/${fileBaseName}.html`,
-        filename: `./${fileBaseName}.html`
+        template: `${SRC_DIR}/html/${page.baseName}.html`,
+        filename: `./${page.baseName}.html`,
+        chunks: page.chunks
       });
     }),
     new MiniCssExtractPlugin({
