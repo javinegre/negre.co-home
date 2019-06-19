@@ -1,7 +1,8 @@
 const path = require('path');
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
 const PUBLIC_DIR = path.resolve(__dirname, 'public');
@@ -59,6 +60,7 @@ const config = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     ...htmlFiles.map(fileBaseName => {
       return new HtmlWebPackPlugin({
         template: `${SRC_DIR}/html/${fileBaseName}.html`,
