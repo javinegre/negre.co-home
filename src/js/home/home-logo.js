@@ -1,4 +1,4 @@
-import Helpers from './common/helpers';
+import Helpers from '../common/helpers';
 
 const HomeLogo = (config) => {
   const reds = ['red', 'salmon', 'crimson', 'orangered', 'gold', 'darkred'];

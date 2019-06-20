@@ -1,7 +1,7 @@
-import Logo from './home-logo';
-import Helpers from './common/helpers';
+import Logo from '../home/home-logo';
+import Helpers from '../common/helpers';
 
-import '../scss/style.scss';
+import '../../scss/style.scss';
 
 const Home = () => {
   const $canvas = document.querySelector('.home-logo-wrapper');

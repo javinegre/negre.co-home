@@ -1,5 +1,5 @@
-import CV from './cv';
-import Page404 from './404';
+import CV from './pages/cv';
+import Page404 from './pages/404';
 
 import '../scss/style.scss';
 

@@ -1,6 +1,6 @@
 import 'waypoints/lib/noframework.waypoints';
 
-import CVChart from './cv/CVChart';
+import CVChart from '../cv/CVChart';
 
 const CV = () => {
   const cvChart = new CVChart('#cv-chart');
