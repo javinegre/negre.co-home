@@ -2,11 +2,11 @@ const express = require('express'),
   app = express(),
   path = require('path');
 
-const distFolder = path.join(__dirname + '/public/dist');
+const distFolder = path.join(__dirname + '/public');
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(distFolder));
 
-app.get(['/', /^\/des(\/)?$/], (req, res) => {
+app.get(/^\/des(\/)?$/, (req, res) => {
   res.sendFile(`${distFolder}/index.html`);
 });
 

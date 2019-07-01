@@ -1,13 +1,12 @@
 const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
-const PUBLIC_DIR = path.resolve(__dirname, 'public');
-const DIST_PATH = 'dist';
-const DIST_DIR = `${PUBLIC_DIR}/${DIST_PATH}`;
+const DIST_DIR = path.resolve(__dirname, 'public');
 
 const pages = [
   {
@@ -31,8 +30,7 @@ const config = {
   },
   output: {
     path: DIST_DIR,
-    filename: '[name].[contenthash].js',
-    publicPath: `${DIST_PATH}/`
+    filename: '[name].[contenthash].js'
   },
   module : {
     rules: [
@@ -83,7 +81,13 @@ const config = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].css',
-    })
+    }),
+    new CopyPlugin([
+      {
+        from: `${SRC_DIR}/assets`,
+        to: `${DIST_DIR}/assets`
+      }
+    ])
   ]
 };
 
