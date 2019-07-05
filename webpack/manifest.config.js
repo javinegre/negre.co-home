@@ -5,7 +5,7 @@ module.exports = {
     'short_name': 'negre.co',
     'description': 'Add description',
     'start_url': '.',
-    'theme_color': '#00d7d2',
+    'theme_color': '#333333',
     'background_color': '#000000',
     'icons': [
         {
