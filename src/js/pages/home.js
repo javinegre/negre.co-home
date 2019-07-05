@@ -59,3 +59,15 @@ const Home = () => {
 };
 
 Home();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js').then((registration) => {
+      /* eslint-disable no-console */
+      console.log('SW registered: ', registration);
+    }).catch((registrationError) => {
+      /* eslint-disable no-console */
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+}

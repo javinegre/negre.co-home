@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
 const DIST_DIR = path.resolve(__dirname, 'public');
@@ -87,7 +88,12 @@ const config = {
         from: `${SRC_DIR}/assets`,
         to: `${DIST_DIR}/assets`
       }
-    ])
+    ]),
+    new WorkboxPlugin.GenerateSW({
+      importsDirectory: 'sw',
+      clientsClaim: true,
+      skipWaiting: true
+    })
   ]
 };
 
