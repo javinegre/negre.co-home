@@ -17,6 +17,8 @@ const Home = () => {
     } else {
       document.querySelector('.home-logo').classList.add('home-logo--noGradient');
     }
+
+    registerServiceWorker();
   }
 
   function initLogo() {
@@ -56,18 +58,20 @@ const Home = () => {
     // FML this was supposed to be easy
     return isSupported && !oldBrowser && !Helpers.isSafari && !Helpers.isMSEdge && !touchCapable;
   }
+
+  function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').then((registration) => {
+          /* eslint-disable no-console */
+          console.log('SW registered: ', registration);
+        }).catch((registrationError) => {
+          /* eslint-disable no-console */
+          console.log('SW registration failed: ', registrationError);
+        });
+      });
+    }
+  }
 };
 
 Home();
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js').then((registration) => {
-      /* eslint-disable no-console */
-      console.log('SW registered: ', registration);
-    }).catch((registrationError) => {
-      /* eslint-disable no-console */
-      console.log('SW registration failed: ', registrationError);
-    });
-  });
-}
