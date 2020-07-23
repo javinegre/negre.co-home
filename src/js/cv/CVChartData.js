@@ -9,6 +9,7 @@ const labels = {
     d3: 'D3',
     angular1: 'Angular 1',
     react: 'React',
+    ts: 'TypeScript',
     node: 'Node.js',
     php: 'PHP',
     wordpress: 'WordPress',
@@ -21,6 +22,7 @@ const labels = {
     m2mobi: 'M2Mobi',
     twctnw: 'TwitterCounter / TNW',
     ayondo: 'ayondo',
+    isdin: 'ISDIN',
   },
 };
 
@@ -76,14 +78,26 @@ const data = {
         type: 'primary',
       },
       {
-        name: labels.languages.jquery,
-        span: ['09-06', '12-08'],
+        name: labels.languages.react,
+        span: ['14-03', '19-01'],
         fill: colors.js,
-        type: 'secondary',
+        type: 'personal',
+      },
+      {
+        name: labels.languages.react,
+        span: ['19-01', Infinity],
+        fill: colors.js,
+        type: 'primary',
+      },
+      {
+        name: labels.languages.ts,
+        span: ['19-01', Infinity],
+        fill: colors.js,
+        type: 'primary',
       },
       {
         name: labels.languages.jquery,
-        span: ['12-08', '17-06'],
+        span: ['08-07', '17-06'],
         fill: colors.js,
         type: 'primary',
       },
@@ -101,21 +115,9 @@ const data = {
       },
       {
         name: labels.languages.angular1,
-        span: ['19-01', Infinity],
+        span: ['19-01', '19-06'],
         fill: colors.js,
         type: 'secondary',
-      },
-      {
-        name: labels.languages.react,
-        span: ['14-03', '19-01'],
-        fill: colors.js,
-        type: 'personal',
-      },
-      {
-        name: labels.languages.react,
-        span: ['19-01', Infinity],
-        fill: colors.js,
-        type: 'primary',
       },
       {
         name: labels.languages.d3,
@@ -155,7 +157,7 @@ const data = {
       },
       {
         name: labels.languages.csharp,
-        span: ['18-01', Infinity],
+        span: ['18-01', '19-06'],
         fill: colors.csharp,
         type: 'secondary',
       },
@@ -199,7 +201,7 @@ const data = {
     },
     {
       name: labels.languages.jquery,
-      pos: '09-06',
+      pos: '08-07',
     },
     {
       name: labels.languages.d3,
@@ -216,6 +218,10 @@ const data = {
     {
       name: labels.languages.react,
       pos: '14-03',
+    },
+    {
+      name: labels.languages.ts,
+      pos: '19-01',
     },
     {
       name: labels.languages.php,
@@ -254,11 +260,15 @@ const data = {
     },
     {
       name: labels.companies.ayondo,
-      span: ['17-06', Infinity],
+      span: ['17-06', '19-06'],
+    },
+    {
+      name: labels.companies.isdin,
+      span: ['19-06', Infinity],
     },
   ],
 
-  yearTicks: ['09-01', '10-01', '11-01', '12-01', '13-01', '14-01', '15-01', '16-01', '17-01', '18-01', '19-01'],
+  yearTicks: ['09-01', '10-01', '11-01', '12-01', '13-01', '14-01', '15-01', '16-01', '17-01', '18-01', '19-01', '20-01'],
 };
 
 export default data;
