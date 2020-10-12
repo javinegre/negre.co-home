@@ -79,7 +79,8 @@ const config = {
       return new HtmlWebPackPlugin({
         template: `${SRC_DIR}/html/${page.baseName}.html`,
         filename: `./${page.baseName}.html`,
-        chunks: page.chunks
+        chunks: page.chunks,
+        minify: false
       });
     }),
     new MiniCssExtractPlugin({
