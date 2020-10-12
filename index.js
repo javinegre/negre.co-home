@@ -10,7 +10,7 @@ app.get(/^\/des(\/)?$/, (req, res) => {
   res.sendFile(`${distFolder}/index.html`);
 });
 
-app.get('/cv', function(req, res) {
+app.get(/^\/cv(\/)?$/, (req, res) => {
   res.sendFile(`${distFolder}/cv.html`);
 });
 
