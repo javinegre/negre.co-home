@@ -3,7 +3,7 @@ import Page404 from './pages/404';
 
 import '../scss/style.scss';
 
-const $bodyId = document.querySelector('body').getAttribute('id');
+const $bodyId = document.querySelector('body')?.getAttribute('id');
 switch ($bodyId) {
   case 'comp-cv':
     CV();

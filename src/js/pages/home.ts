@@ -7,21 +7,9 @@ const Home = () => {
   const $canvas = document.querySelector('.home-logo-wrapper');
   const $gradBgCanvas = document.querySelector('.gradBg-canvas');
 
-  let logo = null;
+  let logo: any = null;
 
-  init();
-
-  function init() {
-    if (checkClipPathSupport()) {
-      initLogo();
-    } else {
-      document.querySelector('.home-logo').classList.add('home-logo--noGradient');
-    }
-
-    registerServiceWorker();
-  }
-
-  function initLogo() {
+  const initLogo = () => {
     logo = Logo({
       $canvas,
       $gradBgCanvas,
@@ -30,23 +18,23 @@ const Home = () => {
     });
 
     initEvents();
-  }
+  };
 
-  function initEvents() {
+  const initEvents = () => {
     // Events
     window.addEventListener('resize', Helpers.debounce(resizeCalcs, 200));
     document.body.addEventListener('mousemove', logo.moveBackground);
     document.body.addEventListener('click', logo.generateGradientBackground);
-  }
+  };
 
-  function resizeCalcs() {
+  const resizeCalcs = () => {
     logo.setDimensions({
       w: window.innerWidth,
       h: window.innerHeight,
     });
-  }
+  };
 
-  function checkClipPathSupport() {
+  const checkClipPathSupport = () => {
     const oldBrowser = !('CSS' in window); // IE Explorer
 
     const isSupported = !oldBrowser && window.CSS.supports('clip-path', 'url()');
@@ -57,9 +45,9 @@ const Home = () => {
 
     // FML this was supposed to be easy
     return isSupported && !oldBrowser && !Helpers.isSafari && !Helpers.isMSEdge && !touchCapable;
-  }
+  };
 
-  function registerServiceWorker() {
+  const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js').then((registration) => {
@@ -71,7 +59,19 @@ const Home = () => {
         });
       });
     }
-  }
+  };
+
+  const init = () => {
+    if (checkClipPathSupport()) {
+      initLogo();
+    } else {
+      document.querySelector('.home-logo')?.classList.add('home-logo--noGradient');
+    }
+
+    registerServiceWorker();
+  };
+
+  init();
 };
 
 Home();

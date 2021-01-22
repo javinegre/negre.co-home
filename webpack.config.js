@@ -31,8 +31,8 @@ const pages = [
 
 const config = {
   entry: {
-    app: `${SRC_DIR}/js/app.js`,
-    home: `${SRC_DIR}/js/pages/home.js`,
+    app: `${SRC_DIR}/js/app`,
+    home: `${SRC_DIR}/js/pages/home`,
   },
   output: {
     path: DIST_DIR,
