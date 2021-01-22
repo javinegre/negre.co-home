@@ -41,26 +41,9 @@ const config = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.js$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        use: {
-          loader: 'eslint-loader',
-          options: {
-            failOnError: false,
-            failOnWarning: false,
-          },
-        },
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-          },
-        },
       },
       {
         test: /\.scss$/,
@@ -74,6 +57,9 @@ const config = {
         ],
       },
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
     new CleanWebpackPlugin(),
