@@ -1,42 +1,44 @@
+/* global require module __dirname  */
+
 const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const PwaManifestWebpackPlugin = require('pwa-manifest-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+// const PwaManifestWebpackPlugin = require('pwa-manifest-webpack-plugin');
+// const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
 const DIST_DIR = path.resolve(__dirname, 'public');
 
-const manifestConfig = require('./webpack/manifest.config');
+// const manifestConfig = require('./webpack/manifest.config');
 
 const pages = [
   {
     baseName: 'index',
-    chunks: ['home']
+    chunks: ['home'],
   },
   {
     baseName: 'cv',
-    chunks: ['app']
+    chunks: ['app'],
   },
   {
     baseName: '404',
-    chunks: ['app']
-  }
+    chunks: ['app'],
+  },
 ];
 
 const config = {
   entry: {
-    'app': `${SRC_DIR}/js/app.js`,
-    'home': `${SRC_DIR}/js/pages/home.js`
+    app: `${SRC_DIR}/js/app.js`,
+    home: `${SRC_DIR}/js/pages/home.js`,
   },
   output: {
     path: DIST_DIR,
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
   },
-  module : {
+  module: {
     rules: [
       {
         enforce: 'pre',
@@ -47,8 +49,8 @@ const config = {
           options: {
             failOnError: false,
             failOnWarning: false,
-          }
-        }
+          },
+        },
       },
       {
         test: /\.js$/,
@@ -56,50 +58,50 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
       {
         test: /\.scss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            //options: {},
+            // options: {},
           },
           'css-loader',
-          'sass-loader'
+          'sass-loader',
         ],
-      }
+      },
     ],
   },
   plugins: [
     new CleanWebpackPlugin(),
-    ...pages.map(page => {
-      return new HtmlWebPackPlugin({
-        template: `${SRC_DIR}/html/${page.baseName}.html`,
-        filename: `./${page.baseName}.html`,
-        chunks: page.chunks,
-        minify: false
-      });
-    }),
+    ...pages.map(page => new HtmlWebPackPlugin({
+      template: `${SRC_DIR}/html/${page.baseName}.html`,
+      filename: `./${page.baseName}.html`,
+      chunks: page.chunks,
+      minify: false,
+    })),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].css',
     }),
-    new CopyPlugin([
-      {
-        from: `${SRC_DIR}/assets`,
-        to: `${DIST_DIR}/assets`
-      }
-    ]),
-    new WorkboxPlugin.GenerateSW({
-      importsDirectory: 'sw',
-      clientsClaim: true,
-      skipWaiting: true
+    new CopyPlugin({
+      patterns: [
+        {
+          from: `${SRC_DIR}/assets`,
+          to: `${DIST_DIR}/assets`,
+        },
+      ],
     }),
-    new PwaManifestWebpackPlugin(manifestConfig)
-  ]
+    // new WorkboxPlugin.GenerateSW({
+    //   importsDirectory: 'sw',
+    //   clientsClaim: true,
+    //   skipWaiting: true,
+    // }),
+    // new PwaManifestWebpackPlugin(manifestConfig),
+  ],
 };
 
 module.exports = config;

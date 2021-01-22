@@ -10,7 +10,7 @@ echo
 
 # Compile assets
 echo "Compiling assets ..."
-node_modules/webpack/bin/webpack.js -p
+yarn prod
 echo "✅ "
 
 echo
