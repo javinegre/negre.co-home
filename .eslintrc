@@ -10,7 +10,8 @@
   "rules": {
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": 0,
-    "@typescript-eslint/no-use-before-define": 0
+    "@typescript-eslint/no-use-before-define": 0,
+    "@typescript-eslint/explicit-function-return-type": "error"
   },
   "globals": {
     "Waypoint": true

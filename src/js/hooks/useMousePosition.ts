@@ -10,7 +10,7 @@ const useMousePosition: (config: { isActive: boolean }) => { x: number, y: numbe
       window.addEventListener('mousemove', setFromEvent);
     }
 
-    return () => {
+    return (): void => {
       if (config.isActive) {
         window.removeEventListener('mousemove', setFromEvent);
       }

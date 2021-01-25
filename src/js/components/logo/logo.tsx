@@ -30,7 +30,7 @@ const LogoComponent: React.FC<ILogoComponentProps> = (props) => {
     window.addEventListener('click', updateBackground);
     window.addEventListener('touchend', updateBackground);
 
-    return () => {
+    return (): void => {
       window.removeEventListener('click', updateBackground);
       window.removeEventListener('touchend', updateBackground);
     };

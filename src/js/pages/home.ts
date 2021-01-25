@@ -8,7 +8,7 @@ import LogoComponent from '../components/logo/logo';
 import { ILogoComponentProps } from '../components/logo/interfaces';
 import { LogoLayoutType } from '../components/logo/types';
 
-const Home = () => {
+const Home: () => void = () => {
   let $logo: Element | null = null;
 
   const unmountLogoComponent: () => void = () => {
@@ -26,17 +26,17 @@ const Home = () => {
     ReactDom.render(logoComponent, $logo);
   };
 
-  const onWindowResize = () => {
+  const onWindowResize: () => void = () => {
     unmountLogoComponent();
     renderLogoComponent();
   };
 
-  const initEvents = () => {
+  const initEvents: () => void = () => {
     // Events
     window.addEventListener('resize', Helpers.debounce(onWindowResize, 200));
   };
 
-  const registerServiceWorker = () => {
+  const registerServiceWorker: () => void = () => {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js').then((registration) => {
@@ -50,7 +50,7 @@ const Home = () => {
     }
   };
 
-  const init = () => {
+  const init: () => void = () => {
     $logo = document.querySelector('[data-react="LogoComponent"]');
 
     renderLogoComponent();

@@ -2,13 +2,13 @@ import Helpers from '../../common/helpers';
 
 import config from './config';
 
-const getLinearGradientStr = (direction: number, color: string) => `linear-gradient(${direction}deg, ${color}, transparent)`;
+const getLinearGradientStr: (direction: number, color: string) => string = (direction, color) => `linear-gradient(${direction}deg, ${color}, transparent)`;
 
-const getGradientBackground = () => {
-  const colorScheme = Helpers.shuffleArray([
-    Helpers.randomElementFromArray(config.reds),
-    Helpers.randomElementFromArray(config.greens),
-    Helpers.randomElementFromArray(config.blues),
+const getGradientBackground: () => string = () => {
+  const colorScheme: string[] = Helpers.shuffleArray<string>([
+    Helpers.randomElementFromArray(config.reds) ?? 'red',
+    Helpers.randomElementFromArray(config.greens) ?? 'green',
+    Helpers.randomElementFromArray(config.blues) ?? 'blue',
   ]);
 
   const rot = Helpers.randomInt(0, 120);
@@ -20,7 +20,7 @@ const getGradientBackground = () => {
   ].join(',');
 };
 
-const getSolidBackground = () => (
+const getSolidBackground: () => string | undefined = () => (
   Helpers.randomElementFromArray([
     Helpers.randomElementFromArray(config.reds),
     Helpers.randomElementFromArray(config.greens),
@@ -28,7 +28,7 @@ const getSolidBackground = () => (
   ])
 );
 
-const checkClipPathSupport = () => {
+const checkClipPathSupport: () => boolean = () => {
   const oldBrowser = !('CSS' in window); // IE Explorer
 
   const isSupported = !oldBrowser && window.CSS.supports('clip-path', 'url()');
