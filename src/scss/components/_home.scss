@@ -71,7 +71,7 @@
     }
 }
 
-@media (min-width: $breakpoint-s) {
+@media (min-width: $breakpoint-s + 1) {
     .home {
         &-content {
             max-width: 400px;
@@ -87,7 +87,7 @@
     }
 }
 
-@media (min-width: $breakpoint-m) {
+@media (min-width: $breakpoint-m + 1) {
     .home {
 
         &.main {

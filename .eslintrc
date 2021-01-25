@@ -1,14 +1,16 @@
 {
-  "extends": "airbnb",
-  "parser": "babel-eslint",
+  "extends": ["airbnb-typescript"],
   "env": {
     "browser": true,
     "node": false
   },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "rules": {
-    "no-new": 0,
-    "no-use-before-define": 0,
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": 0,
+    "@typescript-eslint/no-use-before-define": 0
   },
   "globals": {
     "Waypoint": true

@@ -1,4 +1,3 @@
-
 const randomElementFromArray = (items) => {
   const randomElem = items[Math.floor(Math.random() * items.length)];
   return randomElem;
@@ -6,9 +5,9 @@ const randomElementFromArray = (items) => {
 
 const shuffleArray = (arr) => {
   const newArr = arr
-    .map(a => [Math.random(), a])
+    .map((a) => [Math.random(), a])
     .sort((a, b) => a[0] - b[0])
-    .map(a => a[1]);
+    .map((a) => a[1]);
 
   return newArr;
 };

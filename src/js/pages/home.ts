@@ -1,50 +1,39 @@
-import Logo from '../home/home-logo';
+import React from 'react';
+import ReactDom from 'react-dom';
+
 import Helpers from '../common/helpers';
 
 import '../../scss/style.scss';
+import LogoComponent from '../components/logo/logo';
+import { ILogoComponentProps } from '../components/logo/interfaces';
+import { LogoLayoutType } from '../components/logo/types';
 
 const Home = () => {
-  const $canvas = document.querySelector('.home-logo-wrapper');
-  const $gradBgCanvas = document.querySelector('.gradBg-canvas');
+  let $logo: Element | null = null;
 
-  let logo: any = null;
+  const unmountLogoComponent: () => void = () => {
+    if ($logo) {
+      ReactDom.unmountComponentAtNode($logo);
+    }
+  };
 
-  const initLogo = () => {
-    logo = Logo({
-      $canvas,
-      $gradBgCanvas,
-      w: window.innerWidth,
-      h: window.innerHeight,
-    });
+  const renderLogoComponent: () => void = () => {
+    const mBreakpoint = 768;
+    const layout: LogoLayoutType = window.innerWidth <= mBreakpoint ? 'flat' : 'block';
 
-    initEvents();
+    const logoComponent = React.createElement<ILogoComponentProps>(LogoComponent, { layout });
+
+    ReactDom.render(logoComponent, $logo);
+  };
+
+  const onWindowResize = () => {
+    unmountLogoComponent();
+    renderLogoComponent();
   };
 
   const initEvents = () => {
     // Events
-    window.addEventListener('resize', Helpers.debounce(resizeCalcs, 200));
-    document.body.addEventListener('mousemove', logo.moveBackground);
-    document.body.addEventListener('click', logo.generateGradientBackground);
-  };
-
-  const resizeCalcs = () => {
-    logo.setDimensions({
-      w: window.innerWidth,
-      h: window.innerHeight,
-    });
-  };
-
-  const checkClipPathSupport = () => {
-    const oldBrowser = !('CSS' in window); // IE Explorer
-
-    const isSupported = !oldBrowser && window.CSS.supports('clip-path', 'url()');
-
-    // Disable for mobile devices as most of them don't
-    // support clip-path (window.CSS.supports(...) fails)
-    const touchCapable = 'ontouchstart' in document.documentElement;
-
-    // FML this was supposed to be easy
-    return isSupported && !oldBrowser && !Helpers.isSafari && !Helpers.isMSEdge && !touchCapable;
+    window.addEventListener('resize', Helpers.debounce(onWindowResize, 200));
   };
 
   const registerServiceWorker = () => {
@@ -62,11 +51,11 @@ const Home = () => {
   };
 
   const init = () => {
-    if (checkClipPathSupport()) {
-      initLogo();
-    } else {
-      document.querySelector('.home-logo')?.classList.add('home-logo--noGradient');
-    }
+    $logo = document.querySelector('[data-react="LogoComponent"]');
+
+    renderLogoComponent();
+
+    initEvents();
 
     registerServiceWorker();
   };

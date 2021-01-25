@@ -7,6 +7,7 @@ const CV = () => {
   cvChart.draw();
 
   const $nav = document.getElementById('cv-back-button');
+  // eslint-disable-next-line no-new
   new Waypoint({
     element: document.getElementById('comp-cv'),
     handler: (direction) => {

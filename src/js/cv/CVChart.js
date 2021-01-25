@@ -70,7 +70,7 @@ class CVChart {
     const width = +this.$svg.attr('width') - margin.left - margin.right;
     const height = +this.$svg.attr('height') - margin.top - margin.bottom;
 
-    const yValues = data.cvChartData.languages.map(d => d.name)
+    const yValues = data.cvChartData.languages.map((d) => d.name)
       .filter((d, i, self) => i === self.indexOf(d));
 
     const x = d3scaleLinear()
@@ -92,13 +92,13 @@ class CVChart {
       .data(data.cvChartData.languages)
       .enter()
       .append('rect')
-      .attr('x', d => x(this.getTs(d.span[0])))
-      .attr('y', d => y(d.name))
-      .attr('width', d => x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])))
-      .attr('height', d => (d.type === 'personal' ? y.bandwidth() / 3 : y.bandwidth()))
-      .attr('transform', d => (d.type === 'personal' ? `translate(0,${(y.bandwidth() / 3)})` : ''))
-      .attr('mask', d => (d.type === 'secondary' ? 'url(#mask-stripe)' : ''))
-      .style('fill', d => d.fill);
+      .attr('x', (d) => x(this.getTs(d.span[0])))
+      .attr('y', (d) => y(d.name))
+      .attr('width', (d) => x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])))
+      .attr('height', (d) => (d.type === 'personal' ? y.bandwidth() / 3 : y.bandwidth()))
+      .attr('transform', (d) => (d.type === 'personal' ? `translate(0,${(y.bandwidth() / 3)})` : ''))
+      .attr('mask', (d) => (d.type === 'secondary' ? 'url(#mask-stripe)' : ''))
+      .style('fill', (d) => d.fill);
 
     g.append('svg:g')
       .attr('id', 'yAxis')
@@ -107,14 +107,14 @@ class CVChart {
       .data(data.yAxisValues)
       .enter()
       .append('text')
-      .attr('x', d => (x(this.getTs(d.pos)) - 4))
-      .attr('y', d => y(d.name))
+      .attr('x', (d) => (x(this.getTs(d.pos)) - 4))
+      .attr('y', (d) => y(d.name))
       .attr('dy', ((y.bandwidth() / 2) + 1))
       .attr('text-anchor', 'end')
       .attr('alignment-baseline', 'middle')
       .attr('fill', '#606060')
       .style('font-size', '11px')
-      .text(d => d.name);
+      .text((d) => d.name);
 
     const xAxis = g.append('svg:g')
       .attr('id', 'xAxis')
@@ -124,9 +124,9 @@ class CVChart {
       .data(data.xAxisValues)
       .enter()
       .append('rect')
-      .attr('x', d => x(this.getTs(d.span[0])))
+      .attr('x', (d) => x(this.getTs(d.span[0])))
       .attr('y', 0)
-      .attr('width', d => (x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])) - 1))
+      .attr('width', (d) => (x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])) - 1))
       .attr('height', 18)
       .style('fill', (d, i) => (i % 2 === 0 ? '#303030' : '#4a4a4a'));
 
@@ -134,7 +134,7 @@ class CVChart {
       .data(data.xAxisValues)
       .enter()
       .append('text')
-      .attr('x', d => ((x(this.getTs(d.span[1])) + x(this.getTs(d.span[0]))) / 2))
+      .attr('x', (d) => ((x(this.getTs(d.span[1])) + x(this.getTs(d.span[0]))) / 2))
       .attr('y', 0)
       .attr('dy', 2)
       .attr('text-anchor', 'middle')
@@ -142,14 +142,14 @@ class CVChart {
       .attr('fill', '#e0e0e0')
       .style('font-size', '11px')
       .attr('transform', 'translate(0,8)')
-      .text(d => d.name);
+      .text((d) => d.name);
 
     xAxis.append('svg:g')
       .selectAll('text')
       .data(data.yearTicks)
       .enter()
       .append('text')
-      .attr('x', d => x(this.getTs(d)))
+      .attr('x', (d) => x(this.getTs(d)))
       .attr('y', 0)
       .attr('dy', 2)
       .attr('text-anchor', 'middle')
@@ -157,7 +157,7 @@ class CVChart {
       .attr('fill', '#a0a0a0')
       .style('font-size', '10px')
       .attr('transform', 'translate(0,24)')
-      .text(d => `'${d.split('-')[0]}`);
+      .text((d) => `'${d.split('-')[0]}`);
 
     const legend = g.append('svg:g')
       .attr('id', 'legend');
