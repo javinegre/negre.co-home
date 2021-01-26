@@ -31,8 +31,8 @@ const pages = [
 
 const config = {
   entry: {
-    app: `${SRC_DIR}/js/app`,
-    home: `${SRC_DIR}/js/pages/home`,
+    app: `${SRC_DIR}/ts/app`,
+    home: `${SRC_DIR}/ts/pages/home`,
   },
   output: {
     path: DIST_DIR,
@@ -63,12 +63,15 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    ...pages.map(page => new HtmlWebPackPlugin({
-      template: `${SRC_DIR}/html/${page.baseName}.html`,
-      filename: `./${page.baseName}.html`,
-      chunks: page.chunks,
-      minify: false,
-    })),
+    ...pages.map(
+      (page) =>
+        new HtmlWebPackPlugin({
+          template: `${SRC_DIR}/html/${page.baseName}.html`,
+          filename: `./${page.baseName}.html`,
+          chunks: page.chunks,
+          minify: false,
+        }),
+    ),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].css',

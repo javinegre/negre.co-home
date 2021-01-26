@@ -19,9 +19,13 @@ const Home: () => void = () => {
 
   const renderLogoComponent: () => void = () => {
     const mBreakpoint = 768;
-    const layout: LogoLayoutType = window.innerWidth <= mBreakpoint ? 'flat' : 'block';
+    const layout: LogoLayoutType =
+      window.innerWidth <= mBreakpoint ? 'flat' : 'block';
 
-    const logoComponent = React.createElement<ILogoComponentProps>(LogoComponent, { layout });
+    const logoComponent = React.createElement<ILogoComponentProps>(
+      LogoComponent,
+      { layout },
+    );
 
     ReactDom.render(logoComponent, $logo);
   };
@@ -39,13 +43,16 @@ const Home: () => void = () => {
   const registerServiceWorker: () => void = () => {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js').then((registration) => {
-          /* eslint-disable no-console */
-          console.log('SW registered: ', registration);
-        }).catch((registrationError) => {
-          /* eslint-disable no-console */
-          console.log('SW registration failed: ', registrationError);
-        });
+        navigator.serviceWorker
+          .register('service-worker.js')
+          .then((registration) => {
+            /* eslint-disable no-console */
+            console.log('SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            /* eslint-disable no-console */
+            console.log('SW registration failed: ', registrationError);
+          });
       });
     }
   };
