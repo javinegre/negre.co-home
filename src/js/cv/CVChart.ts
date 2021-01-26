@@ -4,9 +4,18 @@ import {
   scaleBand as d3scaleBand,
 } from 'd3';
 import data from './CVChartData';
+import { D3ElementSelectionType } from '../common/types';
 
 class CVChart {
-  constructor(selector) {
+  selector: string;
+
+  $container: Element | null;
+
+  $svg: D3ElementSelectionType;
+
+  now: number;
+
+  constructor(selector: string) {
     this.selector = selector;
 
     this.$container = document.querySelector(selector);
@@ -20,10 +29,11 @@ class CVChart {
     window.addEventListener('orientationchange', this.reDraw.bind(this));
   }
 
-  buildDefs() {
+  buildDefs(): void {
     const svgDefs = this.$svg.append('svg:defs');
 
-    svgDefs.append('svg:pattern')
+    svgDefs
+      .append('svg:pattern')
       .attr('id', 'pattern-stripe')
       .attr('width', 8)
       .attr('height', 8)
@@ -35,7 +45,8 @@ class CVChart {
       .attr('transform', 'translate(0,0)')
       .attr('fill', '#FFFFFF');
 
-    svgDefs.append('svg:mask')
+    svgDefs
+      .append('svg:mask')
       .attr('id', 'mask-stripe')
       .append('svg:rect')
       .attr('x', 0)
@@ -45,32 +56,35 @@ class CVChart {
       .attr('fill', 'url(#pattern-stripe)');
   }
 
-  getTs(date) {
+  getTs(date: string | typeof Infinity): number {
     return date === Infinity ? this.now : +new Date(`20${date}`);
   }
 
-  reDraw() {
+  reDraw(): void {
     this.$svg.selectAll('g').remove();
     this.draw();
   }
 
-  draw() {
+  draw(): void {
     if (this.chartIsHidden()) {
       return;
     }
 
-    const oWidth = this.$container.clientWidth;
+    const oWidth = this.$container?.clientWidth ?? 0;
 
-    this.$svg.attr('width', oWidth + 44)
-      .attr('height', oWidth * 0.45);
+    this.$svg.attr('width', oWidth + 44).attr('height', oWidth * 0.45);
 
     const margin = {
-      top: 2, right: 0, bottom: 2, left: 44,
+      top: 2,
+      right: 0,
+      bottom: 2,
+      left: 44,
     };
     const width = +this.$svg.attr('width') - margin.left - margin.right;
     const height = +this.$svg.attr('height') - margin.top - margin.bottom;
 
-    const yValues = data.cvChartData.languages.map((d) => d.name)
+    const yValues = data.cvChartData.languages
+      .map((d) => d.name)
       .filter((d, i, self) => i === self.indexOf(d));
 
     const x = d3scaleLinear()
@@ -82,7 +96,8 @@ class CVChart {
       .domain(yValues)
       .padding(0.2);
 
-    const g = this.$svg.append('g')
+    const g = this.$svg
+      .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
     g.append('svg:g')
@@ -93,10 +108,14 @@ class CVChart {
       .enter()
       .append('rect')
       .attr('x', (d) => x(this.getTs(d.span[0])))
-      .attr('y', (d) => y(d.name))
+      .attr('y', (d) => y(d.name) ?? 0)
       .attr('width', (d) => x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])))
-      .attr('height', (d) => (d.type === 'personal' ? y.bandwidth() / 3 : y.bandwidth()))
-      .attr('transform', (d) => (d.type === 'personal' ? `translate(0,${(y.bandwidth() / 3)})` : ''))
+      .attr('height', (d) =>
+        d.type === 'personal' ? y.bandwidth() / 3 : y.bandwidth(),
+      )
+      .attr('transform', (d) =>
+        d.type === 'personal' ? `translate(0,${y.bandwidth() / 3})` : '',
+      )
       .attr('mask', (d) => (d.type === 'secondary' ? 'url(#mask-stripe)' : ''))
       .style('fill', (d) => d.fill);
 
@@ -107,34 +126,43 @@ class CVChart {
       .data(data.yAxisValues)
       .enter()
       .append('text')
-      .attr('x', (d) => (x(this.getTs(d.pos)) - 4))
-      .attr('y', (d) => y(d.name))
-      .attr('dy', ((y.bandwidth() / 2) + 1))
+      .attr('x', (d) => x(this.getTs(d.pos)) - 4)
+      .attr('y', (d) => y(d.name) ?? 0)
+      .attr('dy', y.bandwidth() / 2 + 1)
       .attr('text-anchor', 'end')
       .attr('alignment-baseline', 'middle')
       .attr('fill', '#606060')
       .style('font-size', '11px')
       .text((d) => d.name);
 
-    const xAxis = g.append('svg:g')
+    const xAxis = g
+      .append('svg:g')
       .attr('id', 'xAxis')
-      .attr('transform', `translate(0,${(height - 30)})`);
+      .attr('transform', `translate(0,${height - 30})`);
 
-    xAxis.selectAll('rect')
+    xAxis
+      .selectAll('rect')
       .data(data.xAxisValues)
       .enter()
       .append('rect')
       .attr('x', (d) => x(this.getTs(d.span[0])))
       .attr('y', 0)
-      .attr('width', (d) => (x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])) - 1))
+      .attr(
+        'width',
+        (d) => x(this.getTs(d.span[1])) - x(this.getTs(d.span[0])) - 1,
+      )
       .attr('height', 18)
       .style('fill', (d, i) => (i % 2 === 0 ? '#303030' : '#4a4a4a'));
 
-    xAxis.selectAll('text')
+    xAxis
+      .selectAll('text')
       .data(data.xAxisValues)
       .enter()
       .append('text')
-      .attr('x', (d) => ((x(this.getTs(d.span[1])) + x(this.getTs(d.span[0]))) / 2))
+      .attr(
+        'x',
+        (d) => (x(this.getTs(d.span[1])) + x(this.getTs(d.span[0]))) / 2,
+      )
       .attr('y', 0)
       .attr('dy', 2)
       .attr('text-anchor', 'middle')
@@ -144,7 +172,8 @@ class CVChart {
       .attr('transform', 'translate(0,8)')
       .text((d) => d.name);
 
-    xAxis.append('svg:g')
+    xAxis
+      .append('svg:g')
       .selectAll('text')
       .data(data.yearTicks)
       .enter()
@@ -159,31 +188,34 @@ class CVChart {
       .attr('transform', 'translate(0,24)')
       .text((d) => `'${d.split('-')[0]}`);
 
-    const legend = g.append('svg:g')
-      .attr('id', 'legend');
+    const legend = g.append('svg:g').attr('id', 'legend');
 
     const legendPrimary = legend.append('svg:g');
 
-    legendPrimary.append('rect')
+    legendPrimary
+      .append('rect')
       .attr('x', 0)
       .attr('y', 0)
       .attr('width', 20)
       .attr('height', y.bandwidth())
       .attr('fill', '#808080');
 
-    legendPrimary.append('text')
+    legendPrimary
+      .append('text')
       .attr('x', 24)
       .attr('y', 0)
-      .attr('dy', ((y.bandwidth() / 2) + 1))
+      .attr('dy', y.bandwidth() / 2 + 1)
       .attr('alignment-baseline', 'middle')
       .attr('stroke', '#b0b0b0')
       .style('font-size', '11px')
       .text('Primary at work');
 
-    const legendSecondary = legend.append('svg:g')
+    const legendSecondary = legend
+      .append('svg:g')
       .attr('transform', 'translate(120,0)');
 
-    legendSecondary.append('rect')
+    legendSecondary
+      .append('rect')
       .attr('x', 0)
       .attr('y', 0)
       .attr('width', 20)
@@ -191,38 +223,45 @@ class CVChart {
       .attr('mask', 'url(#mask-stripe)')
       .attr('fill', '#808080');
 
-    legendSecondary.append('text')
+    legendSecondary
+      .append('text')
       .attr('x', 24)
       .attr('y', 0)
-      .attr('dy', ((y.bandwidth() / 2) + 1))
+      .attr('dy', y.bandwidth() / 2 + 1)
       .attr('alignment-baseline', 'middle')
       .attr('stroke', '#b0b0b0')
       .style('font-size', '11px')
       .text('Secondary at work');
 
-    const legendPersonal = legend.append('svg:g')
+    const legendPersonal = legend
+      .append('svg:g')
       .attr('transform', 'translate(252,0)');
 
-    legendPersonal.append('rect')
+    legendPersonal
+      .append('rect')
       .attr('x', 0)
       .attr('y', 0)
       .attr('width', 20)
       .attr('height', y.bandwidth() / 3)
-      .attr('transform', `translate(0,${(y.bandwidth() / 3)})`)
+      .attr('transform', `translate(0,${y.bandwidth() / 3})`)
       .attr('fill', '#808080');
 
-    legendPersonal.append('text')
+    legendPersonal
+      .append('text')
       .attr('x', 24)
       .attr('y', 0)
-      .attr('dy', ((y.bandwidth() / 2) + 1))
+      .attr('dy', y.bandwidth() / 2 + 1)
       .attr('alignment-baseline', 'middle')
       .attr('stroke', '#b0b0b0')
       .style('font-size', '11px')
       .text('Personal projects');
   }
 
-  chartIsHidden() {
-    return window.getComputedStyle(this.$container).getPropertyValue('display') === 'none';
+  chartIsHidden(): boolean {
+    return this.$container
+      ? window.getComputedStyle(this.$container).getPropertyValue('display') ===
+          'none'
+      : true;
   }
 }
 
