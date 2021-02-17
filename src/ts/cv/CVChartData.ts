@@ -265,7 +265,7 @@ const data: ICVChartData = {
     },
     {
       name: labels.companies.isdin,
-      span: ['19-06', Infinity],
+      span: ['19-06', '21-01'],
     },
   ],
 
@@ -282,6 +282,7 @@ const data: ICVChartData = {
     '18-01',
     '19-01',
     '20-01',
+    '21-01',
   ],
 };
 
