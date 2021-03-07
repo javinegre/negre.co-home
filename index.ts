@@ -1,8 +1,11 @@
-const express = require('express'),
-  app = express(),
-  path = require('path');
+import { Express } from 'express';
 
-const distFolder = path.join(__dirname + '/public');
+const express = require('express');
+const path = require('path');
+
+const app: Express = express();
+
+const distFolder = path.join(`${__dirname}/public`);
 
 app.use(express.static(distFolder));
 
@@ -15,8 +18,7 @@ app.get(/^\/cv(\/)?$/, (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.status(404)
-    .sendFile(`${distFolder}/404.html`);
+  res.status(404).sendFile(`${distFolder}/404.html`);
 });
 
 module.exports = app;

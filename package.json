@@ -2,7 +2,7 @@
   "name": "negre.co-home",
   "version": "0.0.1",
   "description": "negre.co Home page",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "prod": "webpack --mode=production",
     "dev": "webpack --mode=development",
@@ -58,7 +58,9 @@
     "workbox-webpack-plugin": "^4.3.1"
   },
   "dependencies": {
+    "@types/express": "^4.17.11",
     "d3": "^6.5.0",
+    "express": "^4.17.1",
     "fstream": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
