@@ -25,6 +25,7 @@ const labels = {
     twctnw: 'TwitterCounter / TNW',
     ayondo: 'ayondo',
     isdin: 'ISDIN',
+    abacum: 'Abacum.io',
   },
 };
 
@@ -56,15 +57,27 @@ const data: ICVChartData = {
     languages: [
       {
         name: labels.languages.html,
-        span: ['08-07', Infinity],
+        span: ['08-07', '21-02'],
         fill: colors.html,
         type: 'primary',
       },
       {
+        name: labels.languages.html,
+        span: ['21-02', Infinity],
+        fill: colors.html,
+        type: 'secondary',
+      },
+      {
         name: labels.languages.css,
-        span: ['08-07', Infinity],
+        span: ['08-07', '21-02'],
         fill: colors.css,
         type: 'primary',
+      },
+      {
+        name: labels.languages.css,
+        span: ['21-02', Infinity],
+        fill: colors.css,
+        type: 'secondary',
       },
       {
         name: labels.languages.less,
@@ -265,7 +278,11 @@ const data: ICVChartData = {
     },
     {
       name: labels.companies.isdin,
-      span: ['19-06', '21-01'],
+      span: ['19-06', '21-02'],
+    },
+    {
+      name: labels.companies.abacum,
+      span: ['21-02', Infinity],
     },
   ],
 
