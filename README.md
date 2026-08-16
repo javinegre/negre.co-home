@@ -29,6 +29,10 @@ infrastructure change required.
 
 ## Commands
 
+Requires Node 24 (see `.nvmrc`, matches `negre.co-server`'s own pin) — run
+`nvm use` before the commands below if your shell defaults to an older
+version.
+
 ```
 yarn dev        # astro dev
 yarn build      # astro build -> dist/client (static assets + prerendered HTML) and dist/server (SSR handler)
