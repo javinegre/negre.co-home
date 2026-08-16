@@ -1,0 +1,25 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    color: color(text);
+    background-color: color(bg);
+    font-family: font-family(main);
+}
+
+a {
+    text-decoration: none;
+    color: color(text-alt);
+
+    border-bottom: 1px solid color(link-border);
+
+    &:hover {
+        color: color(text);
+        border-bottom: 2px solid color(link-border-hover);
+    }
+}

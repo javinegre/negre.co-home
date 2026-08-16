@@ -1,0 +1,26 @@
+
+:root {
+  // Colors
+  --color-main: #29abe2;
+  --color-alt: #00a99d;
+  --color-text: #f0f0f0;
+  --color-text-alt: #c0c0c0;
+  --color-text-grey: #b0b0b0;
+  --color-text-light: #909090;
+  --color-text-lighter: #b0b0b0;
+  --color-bg: #101010;
+  --color-link-border: #333333;
+  --color-link-border-hover:  --color-main;
+  // Font Family
+  --font-family-main: 'Lato', sans-serif;
+  --font-family-alt: 'Overpass Mono', sans-serif;
+}
+
+// Breakpoints
+// https://bholmes.dev/blog/alternative-to-css-variable-media-queries/
+$breakpoint-xs: 320px;
+$breakpoint-s: 480px;
+$breakpoint-m: 768px;
+$breakpoint-l: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-xxl: 1600px;

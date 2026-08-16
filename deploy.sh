@@ -8,9 +8,26 @@ echo "✅ "
 
 echo
 
+echo "Installing dependencies ..."
+yarn install --frozen-lockfile
+echo "✅ "
+
+echo
+
 # Compile assets
-echo "Compiling assets ..."
-yarn prod
+echo "Building ..."
+yarn build
+echo "✅ "
+
+echo
+
+# The build output (dist/server/entry.mjs) is require()'d by the parent
+# negre.co-server gateway process at startup and cached in its module
+# registry, so a content-only deploy needs the gateway reloaded to pick it
+# up — unlike the old static build, which the gateway re-read from disk
+# per-request with no restart needed.
+echo "Reloading gateway ..."
+(cd ../.. && yarn pm2:reload)
 echo "✅ "
 
 echo

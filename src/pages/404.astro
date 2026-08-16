@@ -1,0 +1,19 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Page404Overlay from '../components/page404/Page404Overlay';
+---
+
+<Layout title="404 | javi.negre.co/des" bodyId="comp-404" bodyClass="page-404">
+  <div class="page-404-overlay">
+    <Page404Overlay client:load />
+  </div>
+  <div class="page-404-wrapper">
+    <h1>404</h1>
+    <h2>NOT FOUND</h2>
+  </div>
+  <nav class="page-404-back-button">
+    <a href="/">Back to negre.co</a>
+  </nav>
+</Layout>

@@ -1,0 +1,7 @@
+@function color($color-name) {
+  @return var(--color-#{$color-name});
+}
+  
+@function font-family($family-type) {
+  @return var(--font-family-#{$family-type});
+}

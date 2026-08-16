@@ -1,0 +1,13 @@
+@import 'vendor/normalize';
+
+@import 'core/mixins.scss';
+@import 'core/variables';
+@import 'core/fonts';
+@import 'core/global';
+
+@import 'layout/block';
+
+@import 'components/home';
+@import 'components/home-logo';
+@import 'components/cv';
+@import 'components/404';

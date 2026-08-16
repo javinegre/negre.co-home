@@ -1,0 +1,13 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import HomeContent from '../components/HomeContent.astro';
+
+const description =
+  "Javier Negre's personal site, front-end developer based in Barcelona, experienced in responsive web and keen on UI/UX and data visualization";
+---
+
+<Layout title="javi.negre.co/des" description={description}>
+  <HomeContent />
+</Layout>
