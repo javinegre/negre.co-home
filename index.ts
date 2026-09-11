@@ -19,6 +19,18 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
+// express.static below only serves GET/HEAD; any other method (bots/scanners
+// POSTing to / are routine background noise) falls through to the Astro
+// handler, which can't SSR-render a prerendered-only route and throws
+// FailedToFindPageMapSSR. Short-circuit those here instead.
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.status(404).sendFile(path.join(distClient, '404.html'));
+    return;
+  }
+  next();
+});
+
 // `extensions: ['html']` resolves extension-less routes like /des or /cv to
 // their prerendered des.html/cv.html directly (see astro.config.mjs's
 // build.format: 'file') so express.static serves them at 200 without a
